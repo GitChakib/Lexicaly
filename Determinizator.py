@@ -1,1 +1,0 @@
-#this will be used for determinization of the automata
