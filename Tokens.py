@@ -46,5 +46,8 @@ ID = Token("ID", [(letters, True), (numbers, True)])
        
 if __name__ == "__main__":
 
-     for text in ["if", "iffy", "count2", "2abc"]:
-        print(f"text {text!r:9} IF -> {IF.match_token(text, 0)!r:6} ID -> {ID.match_token(text, 0)!r}")
+    for text in ["if", "chakib", "laptop", "abc123"]:
+
+        print(f"{text} {IF.match_token(text, 0)} {ID.match_token(text, 0)}")
+
+#CURRENT ERROR IS IN MATCH_TOKEN FUNCTION
