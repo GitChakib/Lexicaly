@@ -1,2 +1,2 @@
 # Lexicaly
-Optimizer for lexical analysers used by compilers
+Visualizer for the lexical analysis phase of compilers
