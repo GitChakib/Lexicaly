@@ -13,40 +13,32 @@ class Token:
         self.string = string
 
     def match_token(self, text, pos):
-     
-     start_pos = pos
+        start_pos = pos
 
-     for chars, repeats in self.string:
-       
-       if not repeats:
-         
-         if pos < len(text) and text[pos] in chars:
+        for chars, repeats in self.string:
+            if not repeats:
+                if pos < len(text) and text[pos] in chars:
+                    pos += 1
+                else:
+                    return None
+            else:
+                while pos < len(text) and text[pos] in chars:
+                    pos += 1
 
-            pos += 1
-
-         else: return None
-
-       else:
-          
-          while pos < len(text) and text[pos] in chars:
-             
-             pos += 1
-
-          return text[start_pos:pos]
-
+        return text[start_pos:pos]
 
 #defining our tokens
 
 #every token is a tuple of a name and a list of characters and whether they can be repeated
 
 IF = Token("IF", [("i", False), ("f", False)]) 
-ID = Token("ID", [(letters, True), (numbers, True)])
+ID = Token("ID", [(letters, True), (letters + numbers, True)])
 
 #functtion to read string and match it with the token
        
 if __name__ == "__main__":
 
-    for text in ["if", "chakib", "laptop", "abc123"]:
+    for text in ["if", "chakib", "laptop", "abc123", "a21cc88","@"]:
 
         print(f"{text} {IF.match_token(text, 0)} {ID.match_token(text, 0)}")
 
