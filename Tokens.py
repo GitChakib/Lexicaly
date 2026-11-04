@@ -24,8 +24,11 @@ class Token:
             else:
                 while pos < len(text) and text[pos] in chars:
                     pos += 1
-
-        return text[start_pos:pos]
+                    
+        if pos == start_pos:
+            return None
+        
+        return self.name
 
 #defining our tokens
 
@@ -40,6 +43,6 @@ if __name__ == "__main__":
 
     for text in ["if", "chakib", "laptop", "abc123", "a21cc88","@"]:
 
-        print(f"{text} {IF.match_token(text, 0)} {ID.match_token(text, 0)}")
+        print(f"{text} {IF.match_token(text, 0) or ID.match_token(text, 0)}")
 
 #CURRENT ERROR IS IN MATCH_TOKEN FUNCTION
