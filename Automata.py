@@ -1,12 +1,16 @@
 #every state is an object that has a name and a list of possible transitions and if it can be repeated
+from Tokens import IF, ID, ELSE
+
 
 class State:
 
     def __init__(self, name, transitions, is_repeated = False, is_final = False, is_start = False):
 
         self.name = name
-        self.is_repeated = False
-        self.transitions = []
+        self.is_repeated = is_repeated
+        self.transitions = transitions
+        self.is_final = is_final
+        self.is_start = is_start
 
     def add_transition(self, char, next_state):
 
@@ -16,12 +20,26 @@ class State:
 
         return self.name
 
+    def state_maker(token):
 
-q0 = State("q0", [])
-q1 = State("q1", [])
+        start = State("q0", [], is_start = True)
+        currentState = start
+        stateIndex = 1
 
+        for chars, repeats in token.string: 
 
+            if repeats:
 
-q0.add_transition('a', q1)
+                currentState.add_transition(chars, currentState)
+                currentState.is_repeated = True
 
-print(f"{q0.name}'s transitions: {q0.transitions}")
+            else:
+
+                nextState = State(f"q{stateIndex}", [])
+                currentState.add_transition(chars, nextState)
+                currentState = nextState
+                stateIndex += 1
+
+        currentState.is_final = True
+        currentTokenName = token.name
+
