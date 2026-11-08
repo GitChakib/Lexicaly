@@ -1,6 +1,6 @@
 #every state is an object that has a name and a list of possible transitions and if it can be repeated
 from Tokens import IF, ID, ELSE
-
+from Tokens import letters, numbers
 
 class State:
 
@@ -56,16 +56,30 @@ def printAutomata(start):
 
         if currentState in visitedState:
             continue
-        visitedState.append(State)
+        visitedState.append(currentState)
 
         for chars, nextState in currentState.transitions:
 
-            print(f"{currentState.name} --{chars}--> {nextState.name}")
+            if chars == letters :
+
+                print (f"{currentState.name} --Letters--> {nextState.name}")
+
+            elif chars == letters + numbers:
+
+                print (f"{currentState.name} --Letters + Numbers--> {nextState.name}")
+
+            else:
+
+              print(f"{currentState.name} --{chars}--> {nextState.name}")
 
             toVisit.append(nextState)
 
+            if currentState.is_final == True:
+
+                print (f"{currentState.name} Is Final! --> {token.name}")
+
 
 if __name__ == "__main__":
-    for token in [IF, ID, ELSE]:
+    for token in [IF, ELSE, ID]:
         print(f"--- {token.name} ---")
         printAutomata(state_maker(token))
