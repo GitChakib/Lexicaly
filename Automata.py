@@ -20,7 +20,7 @@ class State:
 
         return self.name
 
-    def state_maker(token):
+def state_maker(token):
 
         start = State("q0", [], is_start = True)
         currentState = start
@@ -43,3 +43,29 @@ class State:
         currentState.is_final = True
         currentTokenName = token.name
 
+        return start
+
+def printAutomata(start):
+
+    visitedState = []
+    toVisit = [start]
+
+    while toVisit:
+
+        currentState = toVisit.pop(0)
+
+        if currentState in visitedState:
+            continue
+        visitedState.append(State)
+
+        for chars, nextState in currentState.transitions:
+
+            print(f"{currentState.name} --{chars}--> {nextState.name}")
+
+            toVisit.append(nextState)
+
+
+if __name__ == "__main__":
+    for token in [IF, ID, ELSE]:
+        print(f"--- {token.name} ---")
+        printAutomata(state_maker(token))
