@@ -1,6 +1,8 @@
 #every state is an object that has a name and a list of possible transitions and if it can be repeated
+
 from Tokens import IF, ID, ELSE
 from Tokens import letters, numbers
+
 
 class State:
 
@@ -22,6 +24,9 @@ class State:
 
 def state_maker(token):
 
+
+#function that takes token and builds states from it
+
         start = State("q0", [], is_start = True)
         currentState = start
         stateIndex = 1
@@ -41,11 +46,12 @@ def state_maker(token):
                 stateIndex += 1
 
         currentState.is_final = True
-        currentTokenName = token.name
 
         return start
 
 def printAutomata(start):
+
+#function for taking the start of the automata and traverses with each iteration printing the transitions of the next state
 
     visitedState = []
     toVisit = [start]
@@ -62,15 +68,15 @@ def printAutomata(start):
 
             if chars == letters :
 
-                print (f"{currentState.name} --Letters--> {nextState.name}")
+                print (f"{currentState.name} --Letters--> {nextState.name}") #only for simplyfying letters instead of mashup of letters
 
             elif chars == letters + numbers:
 
-                print (f"{currentState.name} --Letters + Numbers--> {nextState.name}")
+                print (f"{currentState.name} --Letters + Numbers--> {nextState.name}") #only for simplyfying letters instead of mashup of letters and numbers
 
             else:
 
-              print(f"{currentState.name} --{chars}--> {nextState.name}")
+              print(f"{currentState.name} --{chars}--> {nextState.name}") #only for simplyfying letters instead of mashup of letters and numbers
 
             toVisit.append(nextState)
 
