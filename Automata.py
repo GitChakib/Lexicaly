@@ -2,7 +2,7 @@
 
 class State:
 
-    def __init__(self, name, transitions, is_repeated=False):
+    def __init__(self, name, transitions, is_repeated = False, is_final = False, is_start = False):
 
         self.name = name
         self.is_repeated = False
@@ -12,11 +12,14 @@ class State:
 
         self.transitions.append((char, next_state))
 
+    def __repr__(self):
+
+        return self.name
+
 
 q0 = State("q0", [])
 q1 = State("q1", [])
 
-# need to fix this error q0's transitions: [('a', <__main__.State object at 0x000001D4F4F48410>)]
 
 
 q0.add_transition('a', q1)
